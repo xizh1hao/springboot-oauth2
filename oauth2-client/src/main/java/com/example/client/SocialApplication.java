@@ -197,7 +197,6 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
 //        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest()
 //                .authenticated().and().exceptionHandling()
 //                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
@@ -206,11 +205,11 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
 ////                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 //                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
         
-      http.authorizeRequests().anyRequest().permitAll()
-      .and()
-      .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
-      .csrf();
-        // @formatter:on
+        http.authorizeRequests().anyRequest().permitAll()
+        .and()
+        //一定要将ssofilter设置为before
+        .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+        .csrf();
     }
 
     public static void main(String[] args) {

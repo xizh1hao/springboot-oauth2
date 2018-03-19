@@ -21,7 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
          auth.inMemoryAuthentication()
          .withUser("admin").password("123456").roles("ADMIN");
-        //配置用户来源于数据库
+         //配置用户来源于数据库
+         //放开下面注释的方法即可
 //        auth.userDetailsService(userDetailsService());
     }
     

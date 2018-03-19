@@ -82,7 +82,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
             public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
                 String userName = authentication.getUserAuthentication().getName();
                 User user = (User) authentication.getUserAuthentication().getPrincipal();// 与登录时候放进去的UserDetail实现类{SecurityConfiguration}
-                /** 自定义一些token属性 ***/
+                //重写token，自定义返回的信息
                 final Map<String, Object> additionalInformation = new HashMap<>();
                 additionalInformation.put("userName", userName);
                 additionalInformation.put("roles", user.getAuthorities());
@@ -90,13 +90,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 OAuth2AccessToken enhancedToken = super.enhance(accessToken, authentication);
                 return enhancedToken;
             }
-
         };
+        //资源服务器一定要使用相同的字符串达到对称加密的效果
+        //生产的时候一般使用rsa非对称加密
         accessTokenConverter.setSigningKey("123");
         return accessTokenConverter;
     }
 
     @Bean
+    //使用jwt方式存储token，也可以用redis等存储
     public TokenStore tokenStore() {
         TokenStore tokenStore = new JwtTokenStore(accessTokenConverter());
         return tokenStore;

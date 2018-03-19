@@ -1,43 +1,4 @@
 #换行为两个空格
 server:
   port: 8080
-  
-  
-#log config
-logging: 
-  config: classpath:log4j2.xml
-  level: 
-    root: DEBUG
-    org: 
-      springframework: 
-        web: ERROR
-        beans: ERROR
-        core: ERROR
-    springfox: ERROR
-
-
-#数据库配置
-spring:
-#  profiles:
-#    active: prod
-  datasource:
-    driver: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/wxshop?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&autoReconnect=true
-    username: root
-    password: 123456
-    type: com.alibaba.druid.pool.DruidDataSource
-    filters: mergeStat,wall,log4j2
-    initialSize: 5
-    maxActive: 10
-    minIdle: 5
-    maxWait: 6000
-    validationQuery: SELECT 'x'
-    testOnBorrow: true
-    testOnReturn: true
-    testWhileIdle: true
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    removeAbandoned: true
-    removeAbandonedTimeout: 1800
-    logAbandoned: true
 
