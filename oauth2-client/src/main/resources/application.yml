@@ -1,0 +1,23 @@
+xizh:
+  client:
+    clientId: normalApp
+    clientSecret: normalSecret
+    accessTokenUri: http://localhost:8080/oauth/token
+    userAuthorizationUri: http://localhost:8080/oauth/authorize
+    tokenName: oauth_token
+    authenticationScheme: query
+  resource:
+    userInfoUri: http://localhost:8080/resources/user
+security: 
+  oauth2: 
+    resource: 
+      filter-order: 3
+server:
+  port: 8080
+  session:
+    cookie:
+      name: OAUTH2SESSION
+      
+logging:
+  level:
+    org.springframework.security: DEBUG
