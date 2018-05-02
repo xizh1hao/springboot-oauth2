@@ -225,12 +225,14 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
     }
 
     private Filter ssoFilter() {
+        //hello为回调地址
         OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(
                 "/hello");
         
         filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 //设置成功后跳转的地址
+                //这个地址也可以设置成域名。同时这里也可以通过authentication.getName拿到已授权用户的ID
                 this.setDefaultTargetUrl("/user");
                 super.onAuthenticationSuccess(request, response, authentication);
             }
